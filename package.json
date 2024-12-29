@@ -1,0 +1,19 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "This project is a simple web application that allows users to create an XML document by entering key-value pairs through a form. The application generates an XML file that can be downloaded and stored in a specific folder.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "fs-extra": "^11.2.0",
+    "nodemon": "^3.1.9",
+    "xml2js": "^0.6.2"
+  }
+}
