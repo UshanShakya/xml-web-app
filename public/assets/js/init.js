@@ -13,3 +13,6 @@ async function loadLayout(file, target) {
     console.error(err);
   }
 }
+
+loadLayout("/layouts/header-layout.html", "#header-layout");
+loadLayout("/layouts/footer-layout.html", "#footer-layout");
