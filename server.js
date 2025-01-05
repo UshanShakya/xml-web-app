@@ -3,6 +3,11 @@ const fs = require("fs-extra");
 const path = require("path");
 const bodyParser = require("body-parser");
 const xml2js = require("xml2js"); // For parsing XML
+const jwt = require("jsonwebtoken");
+
+const secretKey = "egcSecretKey1111";
+const defaultUserName = "egc";
+const defaultPassword = "egc123???";
 
 // Initialize the Express app
 const app = express();
@@ -55,9 +60,43 @@ app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "/pages/admin/admin.html"));
 });
 
+// Route to serve adminsetting.html
+app.get("/admin-section", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "public", "/pages/admin/admin-section.html")
+  );
+});
+
+// login valid
+// currently we are not taking headache and just verifying using
+// static username and password
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === defaultUserName && password === defaultPassword) {
+    // Generate a JWT token
+    const token = jwt.sign({ username }, secretKey, { expiresIn: "1D" });
+    return res.status(200).json({ message: "OK", token });
+  } else {
+    return res.status(401).send("Unauthorized");
+  }
+});
+
+// Middleware to verify JWT tokens
+function verifyToken(req, res, next) {
+  const token = req.headers["authorization"]?.split(" ")[1]; // Extract token from the Authorization header
+  if (!token) return res.status(403).send("Token is required");
+
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) return res.status(403).send("Invalid token");
+    req.user = decoded; // Attach the decoded user information to the request
+    next(); // Token is valid, proceed to the next middleware
+  });
+}
+
 // this is the funcitons to save xmls
 // Route to get the XML file data
-app.get("/get-xml", (req, res) => {
+app.get("/get-xml", verifyToken, (req, res) => {
   debugger;
   const filePath = path.join(__dirname, "XML_SETUP", "xml_details.xml");
 
@@ -110,7 +149,7 @@ app.get("/get-xml", (req, res) => {
 });
 
 // Route to save XML data to a file
-app.post("/save-xml", (req, res) => {
+app.post("/save-xml", verifyToken, (req, res) => {
   const xmlContent = req.body.xmlContent; // Get the XML content from request body
 
   const directoryPath = path.join(__dirname, "XML_SETUP"); // Path for saving
@@ -133,12 +172,6 @@ app.post("/save-xml", (req, res) => {
     });
   });
 });
-
-// login valid
-// currently we are not taking headache and just verifying using
-// static username and password
-
-app.post("/admin-login", (req, res) => {});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

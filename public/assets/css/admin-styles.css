@@ -7,21 +7,49 @@
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background: conic-gradient(
+    from 0deg,
+    var(--heading-color),
+    var(--default-color),
+    var(--default-color),
+    var(--default-color),
+    var(--heading-color)
+  );
+}
 
-.card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* Custom Login Container */
+.login-container {
+  background-color: #ffffff;
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+/* Custom Header */
+.login-header {
+  border-radius: 12px 12px 0 0;
+}
+
+/* Form Input Focus */
+.form-control:focus {
+  border-color: var(--heading-color)
+  box-shadow: 0 0 5px var(--heading-color)
+}
+
+/* Submit Button Hover Effect */
+.btn-primary{
+  background: linear-gradient(to left, var(--accent-color), var(--heading-color));
+   transition: transform 0.3s ease-in-out; /* Apply transition on normal state */
+}
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--accent-color), var(--heading-color));
+  border-color: transparent;
   transform: scale(1.02);
-  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-h4 {
-  color: #358227;
-}
-
-.card-header {
-  background-color: #001d3b;
-}
-
-btn-eg-primary {
-  background-color: ;
+.btn-primary:active {
+  transform: scale(0.98);
 }

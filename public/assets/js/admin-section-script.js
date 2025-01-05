@@ -1,18 +1,31 @@
 $(document).ready(function () {
+  // check if localstorage has token or not
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "/admin";
+  }
   const sectionsContainer = $("#sections-container");
   const addSectionBtn = $("#add-section-btn");
   const form = $("#dynamic-form");
 
   // Function to load XML data and populate the form
   function loadXMLData() {
-    $.get("/get-xml", function (data) {
-      if (data.sections && Array.isArray(data.sections)) {
-        data.sections.forEach((section) => {
-          createSectionInitialGet(section.name, section.keyValues);
-        });
-      }
-    }).fail(function () {
-      console.log("Error loading XML file or no XML file present.");
+    $.ajax({
+      url: "/get-xml", // Endpoint URL
+      method: "GET", // HTTP method
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      success: function (data) {
+        if (data.sections && Array.isArray(data.sections)) {
+          data.sections.forEach((section) => {
+            createSectionInitialGet(section.name, section.keyValues);
+          });
+        }
+      },
+      error: function () {
+        console.log("Error loading XML file or no XML file present.");
+      },
     });
   }
 
@@ -167,6 +180,9 @@ $(document).ready(function () {
       url: "/save-xml",
       method: "POST",
       contentType: "application/json",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       data: JSON.stringify({ xmlContent }),
       success: function (response) {
         alert(response.message);
