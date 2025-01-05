@@ -75,7 +75,7 @@ app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === defaultUserName && password === defaultPassword) {
     // Generate a JWT token
-    const token = jwt.sign({ username }, secretKey, { expiresIn: "1D" });
+    const token = jwt.sign({ username }, secretKey, { expiresIn: "1m" });
     return res.status(200).json({ message: "OK", token });
   } else {
     return res.status(401).send("Unauthorized");
@@ -97,7 +97,6 @@ function verifyToken(req, res, next) {
 // this is the funcitons to save xmls
 // Route to get the XML file data
 app.get("/get-xml", verifyToken, (req, res) => {
-  debugger;
   const filePath = path.join(__dirname, "XML_SETUP", "xml_details.xml");
 
   // Check if XML file exists

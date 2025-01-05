@@ -1,7 +1,21 @@
 $(document).ready(function () {
+  // Function to check if the token is valid
+  function isTokenExpired(token) {
+    try {
+      // Decode the JWT token
+      const payload = JSON.parse(atob(token.split(".")[1])); // Decode the payload
+      const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+      return currentTime > payload.exp; // Check if the token is expired
+    } catch (e) {
+      console.error("Invalid token format:", e);
+      return true; // Treat invalid tokens as expired
+    }
+  }
+
   // check if localstorage has token or not
   const token = localStorage.getItem("token");
-  if (!token) {
+  if (!token || isTokenExpired(token)) {
+    // If no token or the token is expired, redirect to login
     window.location.href = "/admin";
   }
   const sectionsContainer = $("#sections-container");
@@ -23,7 +37,11 @@ $(document).ready(function () {
           });
         }
       },
-      error: function () {
+      error: function (er) {
+        if (er.status == 403) {
+          alert("Token Expired");
+          window.location.href = "/admin";
+        }
         console.log("Error loading XML file or no XML file present.");
       },
     });
@@ -187,7 +205,11 @@ $(document).ready(function () {
       success: function (response) {
         alert(response.message);
       },
-      error: function () {
+      error: function (er) {
+        if (er.status == 403) {
+          alert("Token Expired");
+          window.location.href = "/admin";
+        }
         alert("Error saving XML to server");
       },
     });
