@@ -17,17 +17,42 @@ app.use(express.static(path.join(__dirname, "public")));
 //add routes as requiered here
 // Route to serve index.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "/pages/index.html"));
 });
 
 // Route to serve about.html
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "about.html"));
+  res.sendFile(path.join(__dirname, "public", "/pages/about.html"));
+});
+
+// Route to serve services.html
+app.get("/services", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "/pages/services.html"));
+});
+
+// Route to serve portfolio.html
+app.get("/portfolio", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "/pages/portfolio.html"));
+});
+
+// Route to serve team.html
+app.get("/team", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "/pages/team.html"));
+});
+
+// Route to serve contact.html
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "/pages/contact.html"));
+});
+
+// Route to serve faq.html
+app.get("/faq", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "/pages/faq.html"));
 });
 
 // Route to serve admin.html
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "admin.html"));
+  res.sendFile(path.join(__dirname, "public", "/pages/admin/admin.html"));
 });
 
 // this is the funcitons to save xmls
