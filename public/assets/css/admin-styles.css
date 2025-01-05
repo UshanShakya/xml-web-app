@@ -1,0 +1,27 @@
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root {
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #001d3b; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #358227; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #001d3b; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+
+h4 {
+  color: #358227;
+}
+
+.card-header {
+  background-color: #001d3b;
+}
+
+btn-eg-primary {
+  background-color: ;
+}

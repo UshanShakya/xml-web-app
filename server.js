@@ -11,12 +11,10 @@ const port = 3000;
 // Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
 
-// Serve static files (like your HTML)
-app.use(express.static("public"));
-
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
 
+//add routes as requiered here
 // Route to serve index.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -27,8 +25,10 @@ app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
 
+// this is the funcitons to save xmls
 // Route to get the XML file data
 app.get("/get-xml", (req, res) => {
+  debugger;
   const filePath = path.join(__dirname, "XML_SETUP", "xml_details.xml");
 
   // Check if XML file exists
@@ -104,6 +104,11 @@ app.post("/save-xml", (req, res) => {
   });
 });
 
+// login valid
+// currently we are not taking headache and just verifying using
+// static username and password
+
+app.post("/admin-login", (req, res) => {});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

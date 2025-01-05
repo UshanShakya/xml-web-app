@@ -18,7 +18,7 @@
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
   --nav-color: #358227;  /* The default color of the main navmenu links */
-  --nav-hover-color: #001D3B; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #358227; /* Used for navigation links of the dropdown items in the navigation menu. */
@@ -186,7 +186,7 @@ h6 {
 }
 
 .header .branding {
-  background-color: var(--background-color);
+  background-color: var(--accent-color);
   min-height: 60px;
   padding: 10px 0;
 }
