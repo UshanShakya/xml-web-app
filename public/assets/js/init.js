@@ -1,5 +1,11 @@
+// Function to check if a script is already in the document
+function scriptExists(src) {
+  return document.querySelector(`script[src="${src}"]`) !== null;
+}
+
 async function loadLayout(file, target, isHeaderContent) {
   try {
+    debugger;
     const response = await fetch(file);
     if (!response.ok) {
       throw new Error(`Error loading ${file}: ${response.statusText}`);
@@ -18,10 +24,15 @@ async function loadLayout(file, target, isHeaderContent) {
       });
       html = doc.body.innerHTML;
     }
+
+    // Inject the HTML content
     document.querySelector(target).innerHTML = html;
-    var script = document.createElement("script");
-    script.src = "assets/js/main.js";
-    document.body.appendChild(script);
+    let mainScriptUrl = "assets/js/main.js";
+    if (!scriptExists(mainScriptUrl)) {
+      let mainScript = document.createElement("script");
+      mainScript.src = mainScriptUrl;
+      document.body.appendChild(mainScript);
+    }
   } catch (err) {
     console.error(err);
   }
