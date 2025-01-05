@@ -14,5 +14,5 @@ async function loadLayout(file, target) {
   }
 }
 
-loadLayout("/layouts/header-layout.html", "#header-layout");
-loadLayout("/layouts/footer-layout.html", "#footer-layout");
+loadLayout("/pages/layouts/header-layout.html", "#header-layout");
+loadLayout("/pages/layouts/footer-layout.html", "#footer-layout");
